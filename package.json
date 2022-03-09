@@ -1,0 +1,15 @@
+{
+  "name": "com.alephvault.unity.textureutils",
+  "version": "0.0.1",
+  "displayName": "Aleph Vault - Unity - TextureUtils",
+  "description": "Several tools to deal with textures in an easier and more convenient way (e.g. pooling them or merging them).",
+  "unity": "2018.1",
+  "dependencies": {
+    "com.alephvault.unity.support.generic": "0.0.1"
+  },
+  "author": {
+    "name": "Aleph Vault",
+    "email": "info@alephvault.com",
+    "url": "http://www.alephvault.com"
+  }
+}
