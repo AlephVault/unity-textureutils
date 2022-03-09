@@ -1,0 +1,16 @@
+{
+    "name": "AlephVault.Unity.TextureUtils.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8233aa084c7334eb18c3e9713fa443e5"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

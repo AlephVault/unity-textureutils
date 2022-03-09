@@ -1,0 +1,16 @@
+{
+    "name": "AlephVault.Unity.TextureUtils.Samples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:bb6eabf7788063212a196dda6018a5d0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
