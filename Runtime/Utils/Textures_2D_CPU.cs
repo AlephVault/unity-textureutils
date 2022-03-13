@@ -33,8 +33,7 @@ namespace AlephVault.Unity.TextureUtils
                         if (sourcePixels[index].a > 0)
                         {
                             float a = sourcePixels[index].a + (1 - sourcePixels[index].a) * pixels[index].a;
-                            Color c = (sourcePixels[index] * sourcePixels[index].a +
-                                       pixels[index] * pixels[index].a * (1 - sourcePixels[index].a)) / a;
+                            Color c = Color.Lerp(pixels[index] * pixels[index].a, sourcePixels[index], sourcePixels[index].a) / a;
                             c.a = a;
                             pixels[index] = c;
                         }

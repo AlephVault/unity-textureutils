@@ -61,7 +61,7 @@ Shader "Hidden/AlephVault/TextureUtils/Paste"
                 fixed4 current = tex2D(_MainTex, i.uv);
                 const float a = current.a * (1 - overlay.a) + overlay.a;
                 float4 result;
-                result.rgb = lerp(current.rgb, overlay.rgb, overlay.a);
+                result.rgb = lerp(current.rgb * current.a, overlay.rgb, overlay.a) / a;
                 result.a = a;
                 return result;
                 #endif
