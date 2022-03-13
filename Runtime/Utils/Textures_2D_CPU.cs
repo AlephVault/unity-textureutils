@@ -14,9 +14,10 @@ namespace AlephVault.Unity.TextureUtils
                 Color[] pixels = target.GetPixels();
                 if (clear)
                 {
+                    Color clearWhite = new Color(1, 1, 1, 0);
                     for (int index = 0; index < pixels.Length; index++)
                     {
-                        pixels[index] = new Color(0, 0, 0, 0);
+                        pixels[index] = clearWhite;
                     }
                 }
                 
