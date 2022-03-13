@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 585298164}
   - component: {fileID: 585298163}
   m_Layer: 0
-  m_Name: SampleBlitComposed2
+  m_Name: SampleBlitComposedGPU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,13 +150,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 585298162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02a647b18e904712a2f7cfbb98e0d686, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b7d460ef638449ea1122bd4a98d4d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textures:
-  - {fileID: 2800000, guid: 930b473c90e0186e78d2bab47d78a32f, type: 3}
-  - {fileID: 2800000, guid: e24c6929e91076d5daf311e020885ca6, type: 3}
-  - {fileID: 2800000, guid: 1d419a49b01b6ba7f8867686bae554e4, type: 3}
+  - Texture: {fileID: 2800000, guid: 8805474abf37c3b738bd78455189615c, type: 3}
+    Bounds:
+      x: 0
+      y: 0
+      width: 144
+      height: 192
+  - Texture: {fileID: 2800000, guid: 8805474abf37c3b738bd78455189615c, type: 3}
+    Bounds:
+      x: 144
+      y: 0
+      width: 144
+      height: 192
+  - Texture: {fileID: 2800000, guid: 8805474abf37c3b738bd78455189615c, type: 3}
+    Bounds:
+      x: 288
+      y: 0
+      width: 144
+      height: 192
+  accelerated: 1
+  cellSize: {x: 48, y: 48}
+  cellCount: {x: 3, y: 4}
 --- !u!212 &585298164
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -317,7 +335,7 @@ GameObject:
   - component: {fileID: 1738900752}
   - component: {fileID: 1738900751}
   m_Layer: 0
-  m_Name: SampleBlitComposed
+  m_Name: SampleBlitComposedCPU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,9 +354,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textures:
-  - {fileID: 2800000, guid: 930b473c90e0186e78d2bab47d78a32f, type: 3}
-  - {fileID: 2800000, guid: e24c6929e91076d5daf311e020885ca6, type: 3}
-  - {fileID: 2800000, guid: 1d419a49b01b6ba7f8867686bae554e4, type: 3}
+  - Texture: {fileID: 2800000, guid: 8805474abf37c3b738bd78455189615c, type: 3}
+    Bounds:
+      x: 0
+      y: 0
+      width: 144
+      height: 192
+  - Texture: {fileID: 2800000, guid: 8805474abf37c3b738bd78455189615c, type: 3}
+    Bounds:
+      x: 144
+      y: 0
+      width: 144
+      height: 192
+  - Texture: {fileID: 2800000, guid: 8805474abf37c3b738bd78455189615c, type: 3}
+    Bounds:
+      x: 288
+      y: 0
+      width: 144
+      height: 192
+  accelerated: 0
+  cellSize: {x: 48, y: 48}
+  cellCount: {x: 3, y: 4}
 --- !u!212 &1738900752
 SpriteRenderer:
   m_ObjectHideFlags: 0

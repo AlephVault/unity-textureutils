@@ -1,4 +1,5 @@
 using System;
+using AlephVault.Unity.TextureUtils.Types;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.Rendering;
@@ -13,29 +14,6 @@ namespace AlephVault.Unity.TextureUtils
         /// </summary>
         public static partial class Textures
         {
-            /// <summary>
-            ///   A texture source consisting of:
-            ///   - A required 2D texture to read from. It may be
-            ///     either <see cref="Texture2D"/> or a 2-dimension
-            ///     <see cref="RenderTexture"/> (or alternatively
-            ///     <see cref="CustomRenderTexture"/>).
-            ///   - An optional IntRect to read from (otherwise, the
-            ///     (0, 0, width, height) rect will be used instead).
-            /// </summary>
-            public class Texture2DSource
-            {
-                /// <summary>
-                ///   The texture (2D) to read from.
-                /// </summary>
-                public Texture2D Texture;
-
-                /// <summary>
-                ///   The bounds of the texture. If absent, a full rect
-                ///   (i.e. (0, 0, width, height)) will be used instead.
-                /// </summary>
-                public RectInt? Bounds;
-            }
-
             /// <summary>
             ///   Pastes several textures into one target, 2D, texture.
             /// </summary>
@@ -61,10 +39,8 @@ namespace AlephVault.Unity.TextureUtils
                 }
                 else if (target is RenderTexture rtex && rtex.dimension == TextureDimension.Tex2D)
                 {
-                    throw new NotImplementedException(
-                        "Passing a RenderTexture is not yet supported. A future version will " +
-                        "support this texture type (as it will involve GPU rendering)"
-                    );
+                    ValidateSources(rtex.width, rtex.height, sources);
+                    Paste2DGPU(rtex, clear, sources);
                 }
                 else
                 {
@@ -88,8 +64,9 @@ namespace AlephVault.Unity.TextureUtils
                         );
                     }
 
-                    RectInt r = element.Bounds ??= defaultRect;
-                    if (r.x < 0 || r.y < 0 || r.max.x > width || r.max.y > height)
+                    RectInt r = element.Bounds.size == Vector2Int.zero ? defaultRect : element.Bounds;
+                    if (r.x < 0 || r.y < 0 || r.max.x > element.Texture.width || r.max.y > element.Texture.height ||
+                        r.width > width || r.height > height)
                     {
                         throw new ArgumentException(
                             $"Invalid rect ({r.x}, {r.y}, {r.width}, {r.height}) when the " +

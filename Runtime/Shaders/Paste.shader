@@ -14,6 +14,7 @@ Shader "Hidden/AlephVault/TextureUtils/Paste"
         Pass
         {
             CGPROGRAM
+            #pragma multi_compile CLEAR_PREVIOUS PASTE_ABOVE
             #pragma vertex vert
             #pragma fragment frag
             
@@ -47,13 +48,23 @@ Shader "Hidden/AlephVault/TextureUtils/Paste"
             
             fixed4 frag (v2f i) : SV_Target
             {
+                const float2 ovBase = _OverlayOffset.xy * _OverlayTex_TexelSize.xy;
+                const float2 ovOffset = i.uv * _MainTex_TexelSize.zw * _OverlayTex_TexelSize.xy;
+                const float2 ovPos = ovBase + ovOffset;
+                const float4 overlay = tex2D(_OverlayTex, ovPos);
+
+                #ifdef CLEAR_PREVIOUS
+                return overlay;
+                #endif
+
+                #ifdef PASTE_ABOVE
                 fixed4 current = tex2D(_MainTex, i.uv);
-                float4 overlay = tex2D(_OverlayTex, (_OverlayOffset.xy + i.uv * _MainTex_TexelSize.zw) * _OverlayTex_TexelSize.xy);
-                float a = current.a * (1 - overlay.a) + overlay.a;
+                const float a = current.a * (1 - overlay.a) + overlay.a;
                 float4 result;
                 result.rgb = lerp(current.rgb, overlay.rgb, overlay.a);
                 result.a = a;
                 return result;
+                #endif
             }
             ENDCG
         }

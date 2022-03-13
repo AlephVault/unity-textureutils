@@ -1,3 +1,4 @@
+using AlephVault.Unity.TextureUtils.Types;
 using UnityEngine;
 using Debug = System.Diagnostics.Debug;
 
@@ -23,8 +24,7 @@ namespace AlephVault.Unity.TextureUtils
                 
                 foreach (var source in sources)
                 {
-                    Debug.Assert(source.Bounds != null, "source.Bounds != null");
-                    RectInt r = source.Bounds.Value;
+                    RectInt r = source.Bounds;
                     if (r.height == 0 || r.width == 0) continue;
 
                     Color[] sourcePixels = source.Texture.GetPixels(r.x, r.y, r.width, r.height);
