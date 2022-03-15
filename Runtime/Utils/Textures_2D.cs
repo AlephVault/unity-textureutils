@@ -54,7 +54,6 @@ namespace AlephVault.Unity.TextureUtils
             // Validates the input rects of each source.
             private static void ValidateSources(int width, int height, Texture2DSource[] sources)
             {
-                RectInt defaultRect = new RectInt(0, 0, width, height);
                 foreach (Texture2DSource element in sources)
                 {
                     if (element.Texture == null || !element.Texture.isReadable)
@@ -63,15 +62,44 @@ namespace AlephVault.Unity.TextureUtils
                             "At least one of the sources has a null or non-readable texture"
                         );
                     }
-
-                    RectInt r = element.Bounds.size == Vector2Int.zero ? defaultRect : element.Bounds;
-                    if (r.x < 0 || r.y < 0 || r.max.x > element.Texture.width || r.max.y > element.Texture.height ||
-                        r.width > width || r.height > height)
+                    
+                    if (element.Offset.x < 0 || element.Offset.y < 0 || element.Offset.x + width > element.Texture.width
+                        || element.Offset.y + height > element.Texture.height)
                     {
                         throw new ArgumentException(
-                            $"Invalid rect ({r.x}, {r.y}, {r.width}, {r.height}) when the " +
-                            $"size of the target texture is ({width}, {height})"
+                            $"Invalid source texture rect ({element.Offset.x}, {element.Offset.y}, {width}, " +
+                            $"{height}) when the size of the source texture is ({element.Texture.width}, " +
+                            $"{element.Texture.height})"
                         );
+                    }
+
+                    if (element.Mask != null)
+                    {
+                        switch (element.Mask.format)
+                        {
+                            case TextureFormat.R8:
+                            case TextureFormat.R16:
+                            case TextureFormat.BC4:
+                            case TextureFormat.RHalf:
+                            case TextureFormat.RFloat:
+                            case TextureFormat.EAC_R:
+                            case TextureFormat.EAC_R_SIGNED:
+                                break;
+                            default:
+                                Debug.LogWarning(
+                                    "The mask texture is not single-channel. Please note that only the red " +
+                                    "channel will be used for masking purposes."
+                                );
+                                break;
+                        }
+
+                        if (element.Mask.width != width || element.Mask.height != height)
+                        {
+                            Debug.LogWarning(
+                                "The dimensions for mask do not match the dimensions for " +
+                                "the render target. Stretching will occur"
+                            );
+                        }
                     }
                 }
             }

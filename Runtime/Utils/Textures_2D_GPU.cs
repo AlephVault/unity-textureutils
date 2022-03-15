@@ -21,15 +21,15 @@ namespace AlephVault.Unity.TextureUtils
                 RenderTexture output = new RenderTexture(target);
                 // And this is the material we will use for the
                 // offset-aware pasting.
-                Material material = new Material(Shader.Find("Hidden/AlephVault/TextureUtils/Paste"));
-
                 foreach (Texture2DSource source in sources)
                 {
+                    Material material = new Material(Shader.Find("Hidden/AlephVault/TextureUtils/Paste"));
                     material.DisableKeyword(clear ? "PASTE_ABOVE" : "CLEAR_PREVIOUS");
                     material.EnableKeyword(clear ? "CLEAR_PREVIOUS" : "PASTE_ABOVE");
                     material.SetTexture("_OverlayTex", source.Texture);
-                    material.SetVector("_OverlayOffset", (Vector2)source.Bounds.min);
-                    Debug.Log($"Using overlay offset: {(Vector2)source.Bounds.min}");
+                    material.SetVector("_OverlayOffset", (Vector2)source.Offset);
+                    if (source.Mask) material.SetTexture("_Mask", source.Mask);
+                    Debug.Log($"Using overlay offset: {(Vector2)source.Offset}");
                     Graphics.Blit(input, output, material);
                     clear = false;
                     (input, output) = (output, input);

@@ -14,6 +14,8 @@ namespace AlephVault.Unity.TextureUtils
         ///     <see cref="CustomRenderTexture"/>).
         ///   - An optional IntRect to read from (otherwise, the
         ///     (0, 0, width, height) rect will be used instead).
+        ///   - An optional mask, ideally single-channel but
+        ///     anyway it will only take the red channel.
         /// </summary>
         [Serializable]
         public class Texture2DSource
@@ -24,10 +26,18 @@ namespace AlephVault.Unity.TextureUtils
             public Texture2D Texture;
 
             /// <summary>
-            ///   The bounds of the texture. If absent, a full rect
-            ///   (i.e. (0, 0, width, height)) will be used instead.
+            ///   The offset to read the source texture from.
+            ///   If absent, (0, 0) will be used.
             /// </summary>
-            public RectInt Bounds;
+            public Vector2Int Offset;
+
+            /// <summary>
+            ///   The texture (2D) to use as a mask. Ensure that,
+            ///   when set, the mask is of the same pixel size as
+            ///   the target texture to render into, otherwise it
+            ///   will be stretched.
+            /// </summary>
+            public Texture2D Mask;
         }
     }
 }
