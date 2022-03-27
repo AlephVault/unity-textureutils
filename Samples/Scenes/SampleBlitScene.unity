@@ -353,7 +353,7 @@ MonoBehaviour:
     Mask: {fileID: 0}
   - Texture: {fileID: 2800000, guid: 8805474abf37c3b738bd78455189615c, type: 3}
     Offset: {x: 288, y: 0}
-    Mask: {fileID: 0}
+    Mask: {fileID: 2800000, guid: 65eaaa37e75613bfb956aec8ca469ef8, type: 3}
   accelerated: 0
   cellSize: {x: 48, y: 48}
   cellCount: {x: 3, y: 4}
