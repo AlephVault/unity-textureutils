@@ -41,6 +41,7 @@ namespace AlephVault.Unity.TextureUtils
                 // Removes the first elements, keeping a given size.
                 public IEnumerable<TexTracking> ShiftUntil(int size)
                 {
+                    if (size < 0) size = 0;
                     while (Count > size)
                     {
                         TexTracking entry = Shift();
