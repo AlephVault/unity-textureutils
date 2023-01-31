@@ -29,7 +29,6 @@ namespace AlephVault.Unity.TextureUtils
                     material.SetTexture("_OverlayTex", source.Texture);
                     material.SetVector("_OverlayOffset", (Vector2)source.Offset);
                     if (source.Mask) material.SetTexture("_Mask", source.Mask);
-                    Debug.Log($"Using overlay offset: {(Vector2)source.Offset}");
                     Graphics.Blit(input, output, material);
                     clear = false;
                     (input, output) = (output, input);
