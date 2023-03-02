@@ -59,7 +59,7 @@ namespace AlephVault.Unity.TextureUtils
                     if (element.Texture == null || !element.Texture.isReadable)
                     {
                         throw new ArgumentException(
-                            "At least one of the sources has a null or non-readable texture"
+                            $"At least one of the sources has a null or non-readable texture: {element}"
                         );
                     }
                     
