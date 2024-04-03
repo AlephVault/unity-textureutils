@@ -39,12 +39,34 @@ namespace AlephVault.Unity.TextureUtils
                 Graphics.SetRenderTarget(null);
                 if (target == input)
                 {
+#if UNITY_EDITOR
+                    if (!Application.isPlaying)
+                    {
+                        Object.DestroyImmediate(output);
+                    }
+                    else
+                    {
+                        Object.Destroy(output);
+                    }
+#else
                     Object.Destroy(output);
+#endif
                 }
                 else
                 {
                     Graphics.CopyTexture(input, target);
+#if UNITY_EDITOR
+                    if (!Application.isPlaying)
+                    {
+                        Object.DestroyImmediate(output);
+                    }
+                    else
+                    {
+                        Object.Destroy(output);
+                    }
+#else
                     Object.Destroy(input);
+#endif
                 }
             }
         }
