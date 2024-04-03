@@ -58,11 +58,11 @@ namespace AlephVault.Unity.TextureUtils
 #if UNITY_EDITOR
                     if (!Application.isPlaying)
                     {
-                        Object.DestroyImmediate(output);
+                        Object.DestroyImmediate(input);
                     }
                     else
                     {
-                        Object.Destroy(output);
+                        Object.Destroy(input);
                     }
 #else
                     Object.Destroy(input);
