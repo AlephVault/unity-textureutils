@@ -38,14 +38,12 @@ namespace AlephVault.Unity.TextureUtils
                     // not. One is the
                     if (source.Mask == null)
                     {
-                        Debug.Log("Pasting without mask");
                         PasteWithoutMask(pixels, sourcePixels);
                     }
                     else
                     {
                         if (source.Mask.filterMode == FilterMode.Point)
                         {
-                            Debug.Log($"Pasting with mask (point): {String.Join(",", from color in source.Mask.GetPixels() select color.r)}");
                             PasteWithPointMask(
                                 pixels, sourcePixels, source.Mask.GetPixels(),
                                 target.width, target.height, 
@@ -54,7 +52,6 @@ namespace AlephVault.Unity.TextureUtils
                         }
                         else
                         {
-                            Debug.Log($"Pasting with mask (linear): {String.Join(",", from color in source.Mask.GetPixels() select color.r)}");
                             PasteWithLinearMask(
                                 pixels, sourcePixels, source.Mask.GetPixels(),
                                 target.width, target.height, 
@@ -92,8 +89,6 @@ namespace AlephVault.Unity.TextureUtils
                     // Compute the mask coordinates.
                     int maskX = pasteX * maskWidth / pasteWidth;
                     int maskY = pasteY * maskHeight / pasteHeight;
-
-                    Debug.Log($"Coordinates ({pasteX}, {pasteY}), Mask: ({maskX}, {maskY})");
 
                     // If the source point has alpha, then apply the same
                     // algorithm of the pasting but apply a different alpha,
